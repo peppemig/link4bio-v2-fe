@@ -1,0 +1,39 @@
+<div class="buttons-form">
+  <h1>Bottoni</h1>
+  <form [formGroup]="buttonsForm">
+    <form
+      *ngFor="let button of refButtonsForm.controls; index as i"
+      [formGroup]="getFormGroupAt(i)"
+    >
+      <div style="display: flex; align-items: center; gap: 10px">
+        <mat-form-field style="width: 100%" floatLabel="always">
+          <mat-label
+            >{{ button.value.label
+            }}<ng-icon [name]="button.value.icon" size="20"></ng-icon
+          ></mat-label>
+          <input matInput type="text" formControlName="url" />
+        </mat-form-field>
+        <button mat-stroked-button (click)="removeButton(i)">REMOVE</button>
+      </div>
+    </form>
+  </form>
+  <div style="display: flex; justify-content: flex-end">
+    <button mat-flat-button color="primary">Salva</button>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 10px">
+    <ng-container *ngFor="let button of buttonsData">
+      <button
+        *ngIf="!checkFormButtonsContains(button)"
+        (click)="addButton(button)"
+        mat-stroked-button
+      >
+        <span>{{ button.label }}</span>
+        <ng-icon
+          style="display: flex; align-items: center; justify-content: center"
+          [name]="button.icon"
+          size="20"
+        ></ng-icon>
+      </button>
+    </ng-container>
+  </div>
+</div>

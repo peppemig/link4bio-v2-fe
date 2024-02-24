@@ -1,0 +1,14 @@
+<header
+  *ngIf="currentRoute !== '/auth/register' && currentRoute !== '/auth/login'"
+  class="navbar"
+>
+  <nav class="container navbar__container">
+    <span>Link4bio</span>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <a mat-flat-button color="primary" [routerLink]="['/auth/register']"
+        >Registrati</a
+      >
+      <a mat-stroked-button [routerLink]="['/auth/login']">Accedi</a>
+    </div>
+  </nav>
+</header>

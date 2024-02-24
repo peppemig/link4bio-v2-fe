@@ -1,0 +1,33 @@
+<div class="login__screen">
+  <div class="login__container">
+    <a
+      style="text-decoration: none; color: inherit"
+      [routerLink]="['/homepage']"
+      >Link4bio</a
+    >
+    <div class="login__box">
+      <h1>Accedi al tuo account</h1>
+      <form class="login__form">
+        <mat-form-field floatLabel="always">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="La tua email" />
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+          />
+        </mat-form-field>
+        <button mat-flat-button color="primary" sty>Accedi</button>
+        <div class="separator"></div>
+        <button mat-stroked-button>Accedi con Google</button>
+      </form>
+      <p>
+        Non hai ancora un account?
+        <a [routerLink]="['/auth/register']">Registrati</a>
+      </p>
+    </div>
+  </div>
+</div>

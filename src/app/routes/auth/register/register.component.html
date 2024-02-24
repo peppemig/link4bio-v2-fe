@@ -1,0 +1,46 @@
+<div class="register__screen">
+  <div class="register__container">
+    <a
+      style="text-decoration: none; color: inherit"
+      [routerLink]="['/homepage']"
+      >Link4bio</a
+    >
+    <div class="register__box">
+      <h1>Crea il tuo account</h1>
+      <form class="register__form">
+        <mat-form-field floatLabel="always">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput placeholder="Il tuo nome" />
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Cognome</mat-label>
+          <input type="text" matInput placeholder="Il tuo cognome" />
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="name@company.it" />
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+          />
+        </mat-form-field>
+        <mat-form-field floatLabel="always">
+          <mat-label>Conferma password</mat-label>
+          <input
+            type="password"
+            matInput
+            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+          />
+        </mat-form-field>
+        <button mat-flat-button color="primary" sty>Registrati</button>
+        <div class="separator"></div>
+        <button mat-stroked-button>Accedi con Google</button>
+      </form>
+      <p>Hai già un account? <a [routerLink]="['/auth/login']">Accedi</a></p>
+    </div>
+  </div>
+</div>

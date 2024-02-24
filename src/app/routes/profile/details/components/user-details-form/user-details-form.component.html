@@ -1,0 +1,38 @@
+<div class="user-details-form">
+  <div style="display: flex; flex-direction: column">
+    <div style="display: flex; justify-content: flex-end">
+      <button mat-stroked-button>Vai al link</button>
+    </div>
+    <div style="display: flex; justify-content: center">
+      <div
+        style="
+          height: 112px;
+          width: 112px;
+          border-radius: 9999px;
+          background: blue;
+        "
+      ></div>
+    </div>
+    <form style="display: flex; flex-direction: column">
+      <mat-form-field floatLabel="always">
+        <mat-label>Il tuo username</mat-label>
+        <input type="text" matInput placeholder="Username" />
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-label>La tua posizione</mat-label>
+        <input type="text" matInput placeholder="Roma, Italia" />
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-label>La tua bio</mat-label>
+        <textarea
+          type="text"
+          matInput
+          placeholder="Scrivi qui la tua bio"
+        ></textarea>
+      </mat-form-field>
+      <div style="display: flex; justify-content: flex-end">
+        <button mat-flat-button color="primary">Salva</button>
+      </div>
+    </form>
+  </div>
+</div>

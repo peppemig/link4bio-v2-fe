@@ -1,0 +1,45 @@
+@import "/src/assets/scss/colors";
+
+.login__screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $grey-bg;
+
+  .login__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+    width: 100%;
+
+    p {
+      padding-top: 17.5px;
+    }
+
+    .login__box {
+      padding: 24px;
+      background: white;
+      border: 2px solid $grey-light;
+      border-radius: 4px;
+      max-width: 448px;
+      width: 100%;
+
+      .login__form {
+        display: flex;
+        flex-direction: column;
+
+        .separator {
+          display: flex;
+          height: 1px;
+          background: $grey-light;
+          margin: 17.5px 0px;
+        }
+      }
+    }
+  }
+}

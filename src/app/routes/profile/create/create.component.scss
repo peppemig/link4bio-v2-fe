@@ -1,0 +1,19 @@
+@import "/src/assets/scss/colors";
+
+.create__box {
+  border: 2px solid $grey-light;
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,9 @@
+@import "/src/assets/scss/colors";
+
+.buttons-form {
+  border: 2px solid $grey-light;
+  border-radius: 4px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
