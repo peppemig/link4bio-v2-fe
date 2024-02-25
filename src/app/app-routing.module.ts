@@ -19,6 +19,11 @@ const routes: Routes = [
       import('./routes/profile/profile.module').then((m) => m.ProfileModule),
   },
   {
+    path: 'link',
+    loadChildren: () =>
+      import('./routes/link/link.module').then((m) => m.LinkModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

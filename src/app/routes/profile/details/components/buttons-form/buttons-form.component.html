@@ -5,22 +5,30 @@
       *ngFor="let button of refButtonsForm.controls; index as i"
       [formGroup]="getFormGroupAt(i)"
     >
-      <div style="display: flex; align-items: center; gap: 10px">
-        <mat-form-field style="width: 100%" floatLabel="always">
-          <mat-label
-            >{{ button.value.label
-            }}<ng-icon [name]="button.value.icon" size="20"></ng-icon
-          ></mat-label>
+      <div class="button-form">
+        <mat-form-field floatLabel="always">
+          <mat-label>
+            <ng-icon [name]="button.value.icon" size="20"></ng-icon>
+            {{ button.value.label }}</mat-label
+          >
           <input matInput type="text" formControlName="url" />
         </mat-form-field>
-        <button mat-stroked-button (click)="removeButton(i)">REMOVE</button>
+        <button mat-flat-button color="warn" (click)="removeButton(i)">
+          Rimuovi
+        </button>
       </div>
     </form>
   </form>
-  <div style="display: flex; justify-content: flex-end">
-    <button mat-flat-button color="primary">Salva</button>
+  <div class="save-button">
+    <button
+      [disabled]="this.buttonsForm.invalid || this.refButtonsForm.length === 0"
+      mat-flat-button
+      color="primary"
+    >
+      Salva
+    </button>
   </div>
-  <div style="display: flex; flex-wrap: wrap; gap: 10px">
+  <div class="buttons-list">
     <ng-container *ngFor="let button of buttonsData">
       <button
         *ngIf="!checkFormButtonsContains(button)"

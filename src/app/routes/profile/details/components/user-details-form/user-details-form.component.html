@@ -1,19 +1,16 @@
 <div class="user-details-form">
-  <div style="display: flex; flex-direction: column">
-    <div style="display: flex; justify-content: flex-end">
-      <button mat-stroked-button>Vai al link</button>
+  <div class="user-details-form__layout">
+    <div class="link-button">
+      <a mat-stroked-button [routerLink]="['/link/asd']" target="_blank"
+        >Vai al link</a
+      >
     </div>
-    <div style="display: flex; justify-content: center">
-      <div
-        style="
-          height: 112px;
-          width: 112px;
-          border-radius: 9999px;
-          background: blue;
-        "
-      ></div>
+    <div class="avatar__container">
+      <div class="avatar">
+        <span>G</span>
+      </div>
     </div>
-    <form style="display: flex; flex-direction: column">
+    <form>
       <mat-form-field floatLabel="always">
         <mat-label>Il tuo username</mat-label>
         <input type="text" matInput placeholder="Username" />
@@ -30,7 +27,7 @@
           placeholder="Scrivi qui la tua bio"
         ></textarea>
       </mat-form-field>
-      <div style="display: flex; justify-content: flex-end">
+      <div class="save-button">
         <button mat-flat-button color="primary">Salva</button>
       </div>
     </form>

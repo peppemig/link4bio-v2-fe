@@ -6,4 +6,25 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+
+  .button-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .save-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .buttons-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }

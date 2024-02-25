@@ -6,4 +6,39 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+
+  .user-details-form__layout {
+    display: flex;
+    flex-direction: column;
+
+    .link-button {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .avatar__container {
+      display: flex;
+      justify-content: center;
+
+      .avatar {
+        height: 112px;
+        width: 112px;
+        border-radius: 9999px;
+        background: blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .save-button {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
