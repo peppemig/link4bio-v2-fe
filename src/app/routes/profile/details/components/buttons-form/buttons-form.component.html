@@ -1,21 +1,29 @@
 <div class="buttons-form">
-  <h1>Bottoni</h1>
-  <form [formGroup]="buttonsForm">
+  <h2>Bottoni</h2>
+  <form [formGroup]="buttonsForm" class="forms-group">
     <form
       *ngFor="let button of refButtonsForm.controls; index as i"
       [formGroup]="getFormGroupAt(i)"
     >
-      <div class="button-form">
-        <mat-form-field floatLabel="always">
-          <mat-label>
-            <ng-icon [name]="button.value.icon" size="20"></ng-icon>
-            {{ button.value.label }}</mat-label
-          >
-          <input matInput type="text" formControlName="url" />
-        </mat-form-field>
-        <button mat-flat-button color="warn" (click)="removeButton(i)">
-          Rimuovi
-        </button>
+      <div class="l4b-input">
+        <label [htmlFor]="button.value.label" class="flex-label">
+          <ng-icon [name]="button.value.icon" size="20"></ng-icon>
+          {{ button.value.label }}</label
+        >
+        <div class="flex-input">
+          <mat-form-field floatLabel="never">
+            <input
+              [id]="button.value.label"
+              matInput
+              type="text"
+              formControlName="url"
+              placeholder="Inserisci qui l'URL"
+            />
+          </mat-form-field>
+          <button mat-stroked-button (click)="removeButton(i)">
+            <ng-icon name="ionTrashBin" size="20"></ng-icon>
+          </button>
+        </div>
       </div>
     </form>
   </form>
@@ -25,7 +33,11 @@
       mat-flat-button
       color="primary"
     >
-      Salva
+      Salva<ng-icon
+        name="ionSave"
+        size="20"
+        style="display: flex; justify-content: center; align-items: center"
+      ></ng-icon>
     </button>
   </div>
   <div class="buttons-list">
@@ -37,7 +49,7 @@
       >
         <span>{{ button.label }}</span>
         <ng-icon
-          style="display: flex; align-items: center; justify-content: center"
+          style="display: flex; justify-content: center; align-items: center"
           [name]="button.icon"
           size="20"
         ></ng-icon>

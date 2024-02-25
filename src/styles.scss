@@ -4,6 +4,7 @@ html,
 body {
   height: 100%;
   box-sizing: border-box;
+  font-family: "Nunito";
 }
 
 *,
@@ -14,7 +15,6 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 p,
@@ -26,4 +26,9 @@ h5,
 h6 {
   padding: 0px !important;
   margin: 0px !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

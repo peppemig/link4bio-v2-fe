@@ -6,15 +6,12 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 
-  .button-form {
+  .forms-group {
     display: flex;
-    align-items: center;
-    gap: 10px;
-
-    mat-form-field {
-      width: 100%;
-    }
+    flex-direction: column;
+    gap: 20px;
   }
 
   .save-button {

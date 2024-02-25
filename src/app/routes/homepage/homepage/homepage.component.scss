@@ -8,6 +8,8 @@
     font-size: 60px;
     font-weight: 800;
     line-height: 1;
+    text-align: center;
+    margin-bottom: 16px !important;
   }
 
   .subtitle {
@@ -15,11 +17,12 @@
     font-weight: 400;
     line-height: 1;
     text-align: center;
+    margin-bottom: 24px !important;
   }
 
   form {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
   }
 }

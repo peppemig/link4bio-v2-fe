@@ -7,9 +7,17 @@
     coinvolgente.
   </p>
   <form>
-    <mat-form-field>
-      <input matInput placeholder="Il tuo username" />
-    </mat-form-field>
-    <button mat-flat-button color="primary">Ottieni il tuo link</button>
+    <div class="l4b-input">
+      <mat-form-field floatLabel="never">
+        <input matInput placeholder="Il tuo username" />
+      </mat-form-field>
+    </div>
+    <button mat-flat-button color="primary">
+      Ottieni il tuo link<ng-icon
+        name="ionArrowForward"
+        size="20"
+        style="display: flex; justify-content: center; align-items: center"
+      ></ng-icon>
+    </button>
   </form>
 </div>

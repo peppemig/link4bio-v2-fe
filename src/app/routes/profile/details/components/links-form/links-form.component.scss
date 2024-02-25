@@ -6,11 +6,12 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 
   .forms-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
 
     form {
       display: flex;
@@ -18,10 +19,7 @@
       padding: 16px;
       border: 1px solid $grey-light;
       border-radius: 4px;
-
-      mat-form-field {
-        width: 100%;
-      }
+      gap: 16px;
 
       .remove-container {
         display: flex;

@@ -6,9 +6,16 @@
   "
   class="navbar"
 >
-  <nav class="container navbar__container">
-    <span>Link4bio</span>
-    <div style="display: flex; align-items: center; gap: 10px">
+  <nav class="container navbar-container">
+    <a [routerLink]="['/homepage']" class="logo"
+      ><ng-icon
+        name="ionLink"
+        size="30"
+        style="display: flex; justify-content: center; align-items: center"
+      ></ng-icon
+      ><span>Link4bio</span></a
+    >
+    <div class="buttons-container">
       <a mat-flat-button color="primary" [routerLink]="['/auth/register']"
         >Registrati</a
       >

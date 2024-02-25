@@ -2,8 +2,12 @@
   <div class="user-details-form__layout">
     <div class="link-button">
       <a mat-stroked-button [routerLink]="['/link/asd']" target="_blank"
-        >Vai al link</a
-      >
+        >Vai al link<ng-icon
+          name="ionLink"
+          size="20"
+          style="display: flex; justify-content: center; align-items: center"
+        ></ng-icon
+      ></a>
     </div>
     <div class="avatar__container">
       <div class="avatar">
@@ -11,24 +15,42 @@
       </div>
     </div>
     <form>
-      <mat-form-field floatLabel="always">
-        <mat-label>Il tuo username</mat-label>
-        <input type="text" matInput placeholder="Username" />
-      </mat-form-field>
-      <mat-form-field floatLabel="always">
-        <mat-label>La tua posizione</mat-label>
-        <input type="text" matInput placeholder="Roma, Italia" />
-      </mat-form-field>
-      <mat-form-field floatLabel="always">
-        <mat-label>La tua bio</mat-label>
-        <textarea
-          type="text"
-          matInput
-          placeholder="Scrivi qui la tua bio"
-        ></textarea>
-      </mat-form-field>
+      <div class="l4b-input">
+        <label for="name">Nome completo</label>
+        <mat-form-field floatLabel="never">
+          <input id="name" type="text" matInput placeholder="Il tuo nome" />
+        </mat-form-field>
+      </div>
+      <div class="l4b-input">
+        <label for="position">La tua posizione</label>
+        <mat-form-field floatLabel="never">
+          <input
+            id="position"
+            type="text"
+            matInput
+            placeholder="Roma, Italia"
+          />
+        </mat-form-field>
+      </div>
+      <div class="l4b-input">
+        <label for="bio">La tua bio</label>
+        <mat-form-field floatLabel="never">
+          <textarea
+            id="bio"
+            type="text"
+            matInput
+            placeholder="Scrivi qui la tua bio"
+          ></textarea>
+        </mat-form-field>
+      </div>
       <div class="save-button">
-        <button mat-flat-button color="primary">Salva</button>
+        <button mat-flat-button color="primary">
+          Salva<ng-icon
+            name="ionSave"
+            size="20"
+            style="display: flex; justify-content: center; align-items: center"
+          ></ng-icon>
+        </button>
       </div>
     </form>
   </div>

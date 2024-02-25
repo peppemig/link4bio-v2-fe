@@ -1,0 +1,26 @@
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
+@import "palette";
+
+@include mat-core();
+
+$my-primary: mat-palette($my-custom-primary);
+$my-warn: mat-palette($my-custom-warn);
+$my-accent: mat-palette($my-custom-accent);
+
+$nunito-typography: mat.define-typography-config(
+  $font-family: '"Nunito", sans-serif',
+);
+
+$my-app-theme: mat-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: $nunito-typography,
+  )
+);
+
+@include angular-material-theme($my-app-theme);
