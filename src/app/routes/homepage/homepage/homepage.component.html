@@ -6,13 +6,13 @@
     importanti e dare vita alla tua presenza online in modo intuitivo e
     coinvolgente.
   </p>
-  <form>
+  <form [formGroup]="uriForm">
     <div class="l4b-input">
       <mat-form-field floatLabel="never">
-        <input matInput placeholder="Il tuo username" />
+        <input formControlName="uri" matInput placeholder="Il tuo username" />
       </mat-form-field>
     </div>
-    <button mat-flat-button color="primary">
+    <button (click)="checkIfUriExists()" mat-flat-button color="primary">
       Ottieni il tuo link<ng-icon
         name="ionArrowForward"
         size="20"
