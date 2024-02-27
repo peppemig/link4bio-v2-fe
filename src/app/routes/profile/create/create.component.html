@@ -1,17 +1,24 @@
 <div class="page-container">
   <div class="create__box">
     <h1>Aggiungi i dettagli della tua pagina</h1>
-    <form>
+    <form [formGroup]="profileDetailsForm" (ngSubmit)="saveUserDetails()">
       <div class="l4b-input">
         <label for="username">Il tuo username</label>
         <mat-form-field floatLabel="never">
-          <input id="username" type="text" matInput placeholder="Username" />
+          <input
+            formControlName="uri"
+            id="username"
+            type="text"
+            matInput
+            placeholder="Username"
+          />
         </mat-form-field>
       </div>
       <div class="l4b-input">
         <label for="position">La tua posizione</label>
         <mat-form-field floatLabel="never">
           <input
+            formControlName="location"
             id="position"
             type="text"
             matInput
@@ -23,6 +30,7 @@
         <label for="bio">La tua bio</label>
         <mat-form-field floatLabel="never">
           <textarea
+            formControlName="bio"
             id="bio"
             type="text"
             matInput

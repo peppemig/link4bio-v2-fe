@@ -9,7 +9,7 @@ import { Auth } from '@angular/fire/auth';
 import { Observable, from, switchMap } from 'rxjs';
 
 @Injectable()
-export class AuthToken implements HttpInterceptor {
+export class JwtAuth implements HttpInterceptor {
   constructor(private authSvc: Auth) {}
   intercept(
     req: HttpRequest<any>,

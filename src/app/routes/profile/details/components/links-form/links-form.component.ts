@@ -1,5 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Page } from 'src/app/shared/models/page.model';
+import { LinkService } from './services/link.service';
+import { Link } from 'src/app/shared/models/link.model';
 
 @Component({
   selector: 'app-links-form',
@@ -7,14 +17,21 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./links-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinksFormComponent implements OnInit {
+export class LinksFormComponent implements OnInit, OnDestroy {
+  @Input() pageData: Page | undefined;
+  subs: Subscription[] = [];
+
   linksForm = new FormGroup({
     links: new FormArray([]),
   });
 
-  constructor() {}
+  constructor(private linkSvc: LinkService) {}
 
   ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => s.unsubscribe());
+  }
 
   get refLinksForm(): FormArray {
     return this.linksForm.get('links') as FormArray;
@@ -22,6 +39,23 @@ export class LinksFormComponent implements OnInit {
 
   getFormGroupAt(i: number) {
     return this.refLinksForm.at(i) as FormGroup;
+  }
+
+  saveLinks() {
+    this.subs.push(
+      this.linkSvc
+        .saveLinksToPage(
+          this.pageData?.uri!,
+          this.linksForm.value.links as Link[]
+        )
+        .subscribe(() => {
+          this.linksForm.reset({
+            links: [],
+          });
+          const linksFormArray = this.linksForm.get('links') as FormArray;
+          linksFormArray.clear();
+        })
+    );
   }
 
   addLink() {

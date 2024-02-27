@@ -24,10 +24,15 @@
         height: 112px;
         width: 112px;
         border-radius: 9999px;
-        background: blue;
+        background: $blue-normal;
         display: flex;
         align-items: center;
         justify-content: center;
+        span {
+          font-size: 46px;
+          font-weight: 700;
+          color: white;
+        }
       }
     }
 

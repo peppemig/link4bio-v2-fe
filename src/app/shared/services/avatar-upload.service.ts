@@ -6,14 +6,13 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class HomepageService {
+export class AvatarUploadService {
   constructor(private http: HttpClient) {}
 
-  checkIfUriExists(uri: string): Observable<boolean> {
-    let endpoint = environment.services.page.collection.uriExists.replace(
-      'URI',
-      uri
-    );
-    return this.http.get<boolean>(endpoint, { headers: { skipAuth: 'true' } });
+  uploadAvatar(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('multipartFile', file);
+    let endpoint = environment.services.image.collection.uploadAvatar;
+    return this.http.post(endpoint, formData);
   }
 }

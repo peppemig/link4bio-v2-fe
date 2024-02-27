@@ -1,7 +1,7 @@
 <div class="page-container details-screen">
   <!-- DETAILS FORM -->
-  <app-user-details-form></app-user-details-form>
+  <app-user-details-form [pageData]="pageData"></app-user-details-form>
   <app-theme-form></app-theme-form>
-  <app-buttons-form></app-buttons-form>
-  <app-links-form></app-links-form>
+  <app-buttons-form [pageData]="pageData"></app-buttons-form>
+  <app-links-form [pageData]="pageData"></app-links-form>
 </div>

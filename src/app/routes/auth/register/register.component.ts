@@ -43,7 +43,18 @@ export class RegisterComponent implements OnInit {
     const { name, surname, email, password } = this.registerForm.value;
     this.authSvc
       .registerWithEmailPassword(email!, password!, name!, surname!)
-      .then(() => this.router.navigate(['/auth/login']));
+      .then(() => this.router.navigate(['/profile/details']));
+  }
+
+  registerWithGoogle(): void {
+    this.authSvc
+      .signInWithGoogle()
+      .then(() => {
+        this.router.navigate(['/profile/details']);
+      })
+      .catch(() => {
+        console.log('ERRORE REGISTER CON GOOGLE');
+      });
   }
 
   matchValidator(control: AbstractControl): ValidationErrors | null {

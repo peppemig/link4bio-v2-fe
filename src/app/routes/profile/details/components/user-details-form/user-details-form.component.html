@@ -10,21 +10,35 @@
       ></a>
     </div>
     <div class="avatar__container">
-      <div class="avatar">
-        <span>G</span>
+      <div class="avatar" style="position: relative">
+        <span>{{ pageData?.user?.displayName?.charAt(0) }}</span>
+        <button
+          (click)="openAvatarUploadDialog()"
+          mat-fab
+          class="image-upload-btn"
+        >
+          <ng-icon size="20" name="ionImage"></ng-icon>
+        </button>
       </div>
     </div>
-    <form>
+    <form [formGroup]="userInfosForm">
       <div class="l4b-input">
         <label for="name">Nome completo</label>
         <mat-form-field floatLabel="never">
-          <input id="name" type="text" matInput placeholder="Il tuo nome" />
+          <input
+            formControlName="displayName"
+            id="name"
+            type="text"
+            matInput
+            placeholder="Il tuo nome"
+          />
         </mat-form-field>
       </div>
       <div class="l4b-input">
         <label for="position">La tua posizione</label>
         <mat-form-field floatLabel="never">
           <input
+            formControlName="location"
             id="position"
             type="text"
             matInput
@@ -36,6 +50,7 @@
         <label for="bio">La tua bio</label>
         <mat-form-field floatLabel="never">
           <textarea
+            formControlName="bio"
             id="bio"
             type="text"
             matInput

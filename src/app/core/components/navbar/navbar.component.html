@@ -15,11 +15,26 @@
       ></ng-icon
       ><span>Link4bio</span></a
     >
-    <div class="buttons-container">
-      <a mat-flat-button color="primary" [routerLink]="['/auth/register']"
-        >Registrati</a
+    <div *ngIf="user$ | async as user; else notLoggedIn">
+      <button
+        class="mat-elevation-z0 avatar-menu"
+        mat-fab
+        [matMenuTriggerFor]="menu"
       >
-      <a mat-stroked-button [routerLink]="['/auth/login']">Accedi</a>
+        G
+      </button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/profile/details">Profilo</a>
+        <button mat-menu-item (click)="logOut()">Esci</button>
+      </mat-menu>
     </div>
+    <ng-template #notLoggedIn>
+      <div class="buttons-container">
+        <a mat-flat-button color="primary" [routerLink]="['/auth/register']"
+          >Registrati</a
+        >
+        <a mat-stroked-button [routerLink]="['/auth/login']">Accedi</a>
+      </div>
+    </ng-template>
   </nav>
 </header>

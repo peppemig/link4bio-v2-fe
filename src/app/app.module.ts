@@ -12,7 +12,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { AuthToken } from './shared/interceptors/auth-token.interceptor';
+import { JwtAuth } from './shared/interceptors/jwt-auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,7 +43,7 @@ import { AuthToken } from './shared/interceptors/auth-token.interceptor';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthToken,
+      useClass: JwtAuth,
       multi: true,
     },
     {

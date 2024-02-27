@@ -11,6 +11,7 @@ import { UserDetailsFormComponent } from './details/components/user-details-form
 import { ThemeFormComponent } from './details/components/theme-form/theme-form.component';
 import { ButtonsFormComponent } from './details/components/buttons-form/buttons-form.component';
 import { LinksFormComponent } from './details/components/links-form/links-form.component';
+import { AvatarUploadDialogComponent } from './details/components/avatar-upload-dialog/avatar-upload-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LinksFormComponent } from './details/components/links-form/links-form.c
     ThemeFormComponent,
     ButtonsFormComponent,
     LinksFormComponent,
+    AvatarUploadDialogComponent,
   ],
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
 })

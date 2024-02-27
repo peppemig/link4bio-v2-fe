@@ -1,3 +1,5 @@
+@import "/src/assets/scss/colors";
+
 .mat-button-wrapper {
   display: flex !important;
   align-items: center !important;
@@ -11,4 +13,29 @@
 .mat-icon-button,
 .mat-raised-button {
   font-weight: 700 !important;
+}
+
+// AVATAR BUTTON
+.mat-fab.avatar-menu {
+  height: 44px !important;
+  width: 44px !important;
+  background: $blue-normal !important;
+  color: white !important;
+  font-weight: 700 !important;
+  .mat-button-wrapper {
+    padding: 0px !important;
+  }
+}
+
+// IMAGE UPLOAD BUTTON
+.mat-fab.image-upload-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: $grey-light !important;
+  height: 40px !important;
+  width: 40px !important;
+  .mat-button-wrapper {
+    padding: 0px !important;
+  }
 }
