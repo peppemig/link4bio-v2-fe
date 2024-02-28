@@ -28,9 +28,11 @@ import {
   remixPhoneFill,
   remixEdit2Fill,
 } from '@ng-icons/remixicon';
+import { GetButtonIconPipe } from './pipes/get-button-icon.pipe';
+import { GetButtonLabelPipe } from './pipes/get-button-label.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [GetButtonIconPipe, GetButtonLabelPipe],
   imports: [
     CommonModule,
     MaterialModule,
@@ -59,6 +61,13 @@ import {
       ionCloudUpload,
     }),
   ],
-  exports: [MaterialModule, NgIconsModule, ReactiveFormsModule, FormsModule],
+  exports: [
+    MaterialModule,
+    NgIconsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    GetButtonIconPipe,
+    GetButtonLabelPipe,
+  ],
 })
 export class SharedModule {}

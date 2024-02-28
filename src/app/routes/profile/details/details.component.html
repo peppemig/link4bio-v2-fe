@@ -1,7 +1,16 @@
 <div class="page-container details-screen">
   <!-- DETAILS FORM -->
-  <app-user-details-form [pageData]="pageData"></app-user-details-form>
+  <app-user-details-form
+    [pageData]="pageData"
+    (detailsMutationEvent)="getPageData()"
+  ></app-user-details-form>
   <app-theme-form></app-theme-form>
-  <app-buttons-form [pageData]="pageData"></app-buttons-form>
-  <app-links-form [pageData]="pageData"></app-links-form>
+  <app-buttons-form
+    [pageData]="pageData"
+    (buttonMutationEvent)="getPageData()"
+  ></app-buttons-form>
+  <app-links-form
+    [pageData]="pageData"
+    (linkMutationEvent)="getPageData()"
+  ></app-links-form>
 </div>

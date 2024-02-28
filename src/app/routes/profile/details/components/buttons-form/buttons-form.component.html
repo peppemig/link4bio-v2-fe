@@ -1,5 +1,38 @@
 <div class="buttons-form">
   <h2>Bottoni</h2>
+  <ng-container
+    *ngIf="pageData && (pageData?.buttons)!.length > 0; else noButtons"
+  >
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <div class="l4b-input" *ngFor="let button of pageData.buttons">
+        <label [htmlFor]="button | getButtonLabel" class="flex-label">
+          <ng-icon [name]="button | getButtonIcon" size="20"></ng-icon>
+          {{ button | getButtonLabel }}</label
+        >
+        <div class="flex-input">
+          <mat-form-field floatLabel="never">
+            <input
+              disabled
+              [id]="button | getButtonLabel"
+              matInput
+              type="text"
+              [placeholder]="button.url"
+            />
+          </mat-form-field>
+          <button
+            (click)="openEditButtonDialog(button)"
+            type="button"
+            mat-stroked-button
+          >
+            <ng-icon name="remixEdit2Fill" size="20"></ng-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noButtons>
+    <p>Non hai ancora aggiunto nessun bottone</p>
+  </ng-template>
   <form
     [formGroup]="buttonsForm"
     (ngSubmit)="saveButtons()"
@@ -50,7 +83,9 @@
   <div class="buttons-list">
     <ng-container *ngFor="let button of buttonsData">
       <button
-        *ngIf="!checkFormButtonsContains(button)"
+        *ngIf="
+          !checkFormButtonsContain(button) && !checkSavedButtonsContain(button)
+        "
         (click)="addButton(button)"
         mat-stroked-button
       >

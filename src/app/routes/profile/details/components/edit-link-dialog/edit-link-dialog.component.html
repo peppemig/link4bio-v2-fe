@@ -1,0 +1,56 @@
+<form
+  [formGroup]="linkForm"
+  (ngSubmit)="editLink()"
+  style="display: flex; flex-direction: column; gap: 20px; width: 400px"
+>
+  <div style="display: flex; flex-direction: column; gap: 20px">
+    <div class="l4b-input">
+      <label>Titolo</label>
+      <mat-form-field floatLabel="never">
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="Inserisci qui il titolo"
+        />
+      </mat-form-field>
+    </div>
+    <div class="l4b-input">
+      <label>Sottotitolo</label>
+      <mat-form-field floatLabel="never">
+        <input
+          matInput
+          type="text"
+          formControlName="subtitle"
+          placeholder="Inserisci qui il sottotitolo"
+        />
+      </mat-form-field>
+    </div>
+    <div class="l4b-input">
+      <label>URL</label>
+      <mat-form-field floatLabel="never">
+        <input
+          matInput
+          type="text"
+          formControlName="url"
+          placeholder="Inserisci qui l'URL"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div
+    style="display: flex; align-items: center; justify-content: space-between"
+  >
+    <button type="button" mat-flat-button color="warn" (click)="deleteLink()">
+      Elimina
+    </button>
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="linkForm.pristine || linkForm.invalid"
+    >
+      Salva
+    </button>
+  </div>
+</form>

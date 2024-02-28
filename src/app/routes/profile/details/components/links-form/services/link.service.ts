@@ -5,7 +5,7 @@ import { Link } from 'src/app/shared/models/link.model';
 import { environment } from 'src/environments/environment';
 
 interface LinkPayload {
-  linkId: number;
+  linkId?: number;
   title: string;
   subtitle: string;
   url: string;

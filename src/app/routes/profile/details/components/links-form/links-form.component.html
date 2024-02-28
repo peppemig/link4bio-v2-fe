@@ -1,5 +1,54 @@
 <div class="links-form">
   <h2>Links</h2>
+  <div *ngIf="pageData && pageData.links.length > 0; else noLinks">
+    <div class="forms-container">
+      <div class="link-form" *ngFor="let link of pageData.links">
+        <div class="l4b-input">
+          <label>Titolo</label>
+          <mat-form-field floatLabel="never">
+            <input disabled matInput type="text" [placeholder]="link.title" />
+          </mat-form-field>
+        </div>
+        <div class="l4b-input">
+          <label>Sottotitolo</label>
+          <mat-form-field floatLabel="never">
+            <input
+              disabled
+              matInput
+              type="text"
+              [placeholder]="link.subtitle"
+            />
+          </mat-form-field>
+        </div>
+        <div class="l4b-input">
+          <label>URL</label>
+          <mat-form-field floatLabel="never">
+            <input disabled matInput type="text" [placeholder]="link.url" />
+          </mat-form-field>
+        </div>
+        <div class="remove-container">
+          <button
+            (click)="openEditLinkDialog(link)"
+            type="button"
+            mat-stroked-button
+          >
+            Modifica<ng-icon
+              name="remixEdit2Fill"
+              size="20"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            ></ng-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noLinks>
+    <p>Non hai ancora aggiunto nessun link</p>
+  </ng-template>
   <form
     [formGroup]="linksForm"
     (ngSubmit)="saveLinks()"
@@ -8,6 +57,7 @@
     <form
       *ngFor="let link of refLinksForm.controls; index as i"
       [formGroup]="getFormGroupAt(i)"
+      class="link-form"
     >
       <div class="l4b-input">
         <label>Titolo</label>

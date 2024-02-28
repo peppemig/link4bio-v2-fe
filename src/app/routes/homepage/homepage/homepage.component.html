@@ -6,18 +6,32 @@
     importanti e dare vita alla tua presenza online in modo intuitivo e
     coinvolgente.
   </p>
-  <form [formGroup]="uriForm">
-    <div class="l4b-input">
-      <mat-form-field floatLabel="never">
-        <input formControlName="uri" matInput placeholder="Il tuo username" />
-      </mat-form-field>
-    </div>
-    <button (click)="checkIfUriExists()" mat-flat-button color="primary">
-      Ottieni il tuo link<ng-icon
-        name="ionArrowForward"
-        size="20"
-        style="display: flex; justify-content: center; align-items: center"
-      ></ng-icon>
-    </button>
-  </form>
+  <a
+    *ngIf="user$ | async as user; else notLoggedIn"
+    mat-flat-button
+    color="primary"
+    routerLink="/profile/details"
+  >
+    Vai al tuo profilo<ng-icon
+      name="ionArrowForward"
+      size="20"
+      style="display: flex; justify-content: center; align-items: center"
+    ></ng-icon>
+  </a>
+  <ng-template #notLoggedIn>
+    <form [formGroup]="uriForm">
+      <div class="l4b-input">
+        <mat-form-field floatLabel="never">
+          <input formControlName="uri" matInput placeholder="Il tuo username" />
+        </mat-form-field>
+      </div>
+      <button (click)="checkIfUriExists()" mat-flat-button color="primary">
+        Ottieni il tuo link<ng-icon
+          name="ionArrowForward"
+          size="20"
+          style="display: flex; justify-content: center; align-items: center"
+        ></ng-icon>
+      </button>
+    </form>
+  </ng-template>
 </div>

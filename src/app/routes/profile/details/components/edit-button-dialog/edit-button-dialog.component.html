@@ -1,0 +1,39 @@
+<form
+  [formGroup]="buttonForm"
+  (ngSubmit)="editButton()"
+  style="display: flex; flex-direction: column; gap: 20px; width: 400px"
+>
+  <div class="l4b-input">
+    <label [htmlFor]="button.id.toString()" class="flex-label">
+      <ng-icon [name]="button | getButtonIcon" size="20"></ng-icon>
+      {{ button | getButtonLabel }}
+    </label>
+    <mat-form-field floatLabel="never">
+      <input
+        formControlName="url"
+        [id]="button.id.toString()"
+        matInput
+        type="text"
+      />
+    </mat-form-field>
+  </div>
+  <div
+    style="display: flex; align-items: center; justify-content: space-between"
+  >
+    <button type="button" mat-flat-button color="warn" (click)="deleteButton()">
+      Elimina
+    </button>
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="
+        buttonForm.pristine ||
+        buttonForm.invalid ||
+        buttonForm.value === button.url
+      "
+    >
+      Salva
+    </button>
+  </div>
+</form>

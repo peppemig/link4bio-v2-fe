@@ -24,7 +24,7 @@ export class ButtonService {
       'BUTTONID',
       buttonId.toString()
     );
-    return this.http.put<Button>(endpoint, url);
+    return this.http.put<Button>(endpoint, { url });
   }
 
   deleteButton(buttonId: number): Observable<any> {

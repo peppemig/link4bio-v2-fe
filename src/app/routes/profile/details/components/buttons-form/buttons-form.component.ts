@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,6 +15,8 @@ import { Page } from 'src/app/shared/models/page.model';
 import { ButtonService } from './services/button.service';
 import { Subscription } from 'rxjs';
 import { Button } from 'src/app/shared/models/button.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EditButtonDialogComponent } from '../edit-button-dialog/edit-button-dialog.component';
 
 @Component({
   selector: 'app-buttons-form',
@@ -22,6 +26,8 @@ import { Button } from 'src/app/shared/models/button.model';
 })
 export class ButtonsFormComponent implements OnInit, OnDestroy {
   @Input() pageData: Page | undefined;
+  @Output() buttonMutationEvent = new EventEmitter();
+
   buttonsData = buttons;
   subs: Subscription[] = [];
 
@@ -29,7 +35,7 @@ export class ButtonsFormComponent implements OnInit, OnDestroy {
     buttons: new FormArray([]),
   });
 
-  constructor(private buttonSvc: ButtonService) {}
+  constructor(private buttonSvc: ButtonService, private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -58,8 +64,21 @@ export class ButtonsFormComponent implements OnInit, OnDestroy {
           });
           const buttonsFormArray = this.buttonsForm.get('buttons') as FormArray;
           buttonsFormArray.clear();
+          this.buttonMutationEvent.emit();
         })
     );
+  }
+
+  openEditButtonDialog(button: Button) {
+    let dialogRef = this.dialog.open(EditButtonDialogComponent, {
+      data: button,
+    });
+    const sub = dialogRef.componentInstance.dialogMutationEvent.subscribe(
+      () => {
+        this.buttonMutationEvent.emit();
+      }
+    );
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   addButton(button: any) {
@@ -83,9 +102,13 @@ export class ButtonsFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkFormButtonsContains(button: any) {
+  checkFormButtonsContain(button: any) {
     return this.refButtonsForm.controls.some(
       (btn) => btn.value.name === button.name
     );
+  }
+
+  checkSavedButtonsContain(button: any) {
+    return this.pageData?.buttons.some((btn) => btn.name === button.name);
   }
 }
