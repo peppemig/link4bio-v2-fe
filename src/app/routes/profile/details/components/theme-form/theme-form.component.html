@@ -1,1 +1,79 @@
-<div class="theme-form"><h2>Tema</h2></div>
+<div class="theme-form">
+  <div class="grid-container">
+    <!--LINK PREVIEW-->
+    <div class="link-preview__container">
+      <!--AVATAR-->
+      <div class="avatar">G</div>
+      <!--INFOS-->
+      <div class="infos">
+        <h1>@mariorossi</h1>
+        <h2>Mario Rossi</h2>
+        <h3>Roma, Italia</h3>
+      </div>
+      <!--BUTTONS-->
+      <div class="buttons">
+        <button mat-icon-button>
+          <ng-icon name="ionLocation" size="30"></ng-icon>
+        </button>
+        <button mat-icon-button>
+          <ng-icon name="ionLocation" size="30"></ng-icon>
+        </button>
+      </div>
+      <!--LINKS-->
+      <div class="links">
+        <div class="link">
+          <h2>Titolo</h2>
+          <p>Sottotitolo</p>
+        </div>
+      </div>
+    </div>
+    <!--COLOR PICKERS-->
+    <div class="color-pickers__container">
+      <form [formGroup]="themeForm" class="color-pickers__form">
+        <div class="color-picker">
+          <label for="backgroundColor">Colore sfondo</label>
+          <div
+            id="backgroundColor"
+            class="picker-btn"
+            formControlName="backgroundColor"
+            [style.background]="themeForm.get('backgroundColor')?.value"
+            ngx-colors-trigger
+          ></div>
+        </div>
+        <div class="color-picker">
+          <label for="textColor">Colore testo</label>
+          <div
+            id="textColor"
+            class="picker-btn"
+            formControlName="textColor"
+            [style.background]="themeForm.get('textColor')?.value"
+            ngx-colors-trigger
+          ></div>
+        </div>
+        <div class="color-picker">
+          <label for="buttonColor">Colore bottoni</label>
+          <div
+            id="buttonColor"
+            class="picker-btn"
+            formControlName="buttonColor"
+            [style.background]="themeForm.get('buttonColor')?.value"
+            ngx-colors-trigger
+          ></div>
+        </div>
+        <div class="color-picker">
+          <label for="buttonTextColor">Colore testo bottoni</label>
+          <div
+            id="buttonTextColor"
+            class="picker-btn"
+            formControlName="buttonTextColor"
+            [style.background]="themeForm.get('buttonTextColor')?.value"
+            ngx-colors-trigger
+          ></div>
+        </div>
+      </form>
+      <div class="submit-btn">
+        <button mat-flat-button color="primary">Applica</button>
+      </div>
+    </div>
+  </div>
+</div>

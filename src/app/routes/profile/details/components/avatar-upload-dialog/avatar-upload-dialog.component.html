@@ -1,1 +1,27 @@
-<p>avatar-upload-dialog works!</p>
+<form (ngSubmit)="uploadAvatar()" class="avatar-upload-container">
+  <label *ngIf="!avatarImageMin; else imageAvailable" for="upload"
+    ><ng-icon name="ionCloudUpload" size="60"></ng-icon>
+    <p>Clicca qui per caricare un'immagine di profilo</p></label
+  >
+  <ng-template #imageAvailable>
+    <img class="avatar-preview" [src]="avatarImageMin" />
+  </ng-template>
+  <input
+    id="upload"
+    style="display: none"
+    type="file"
+    (change)="onSelectedFileChange($event)"
+  />
+  <div class="buttons-container">
+    <button mat-stroked-button mat-dialog-close>Annulla</button>
+    <button
+      [disabled]="!avatarImage"
+      mat-flat-button
+      color="primary"
+      type="submit"
+      (click)="uploadAvatar()"
+    >
+      Carica
+    </button>
+  </div>
+</form>

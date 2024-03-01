@@ -70,7 +70,15 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
   }
 
   openAvatarUploadDialog() {
-    this.dialog.open(AvatarUploadDialogComponent);
+    let dialogRef = this.dialog.open(AvatarUploadDialogComponent, {
+      autoFocus: false,
+    });
+    const sub = dialogRef.componentInstance.avatarMutationEvent.subscribe(
+      () => {
+        this.detailsMutationEvent.emit();
+      }
+    );
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   sameValueValidator(control: AbstractControl): ValidationErrors | null {

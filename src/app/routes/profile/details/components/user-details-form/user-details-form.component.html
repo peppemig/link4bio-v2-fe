@@ -11,7 +11,14 @@
     </div>
     <div class="avatar__container">
       <div class="avatar" style="position: relative">
-        <span>{{ pageData?.user?.displayName?.charAt(0) }}</span>
+        <img
+          style="height: 112px; width: 112px; border-radius: 9999px"
+          [src]="pageData?.user?.avatarUrl"
+          *ngIf="pageData?.user?.avatarUrl; else noAvatar"
+        />
+        <ng-template #noAvatar>
+          <span>{{ pageData?.user?.displayName?.charAt(0) }}</span>
+        </ng-template>
         <button
           (click)="openAvatarUploadDialog()"
           mat-fab

@@ -30,6 +30,7 @@ import {
 } from '@ng-icons/remixicon';
 import { GetButtonIconPipe } from './pipes/get-button-icon.pipe';
 import { GetButtonLabelPipe } from './pipes/get-button-label.pipe';
+import { NgxColorsModule } from 'ngx-colors';
 
 @NgModule({
   declarations: [GetButtonIconPipe, GetButtonLabelPipe],
@@ -68,6 +69,7 @@ import { GetButtonLabelPipe } from './pipes/get-button-label.pipe';
     FormsModule,
     GetButtonIconPipe,
     GetButtonLabelPipe,
+    NgxColorsModule,
   ],
 })
 export class SharedModule {}

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Page } from 'src/app/shared/models/page.model';
 import { Subscription } from 'rxjs';
 import { PageService } from 'src/app/shared/services/page.service';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 
 @Component({
   selector: 'app-details',
@@ -12,6 +13,7 @@ import { PageService } from 'src/app/shared/services/page.service';
 export class DetailsComponent implements OnInit, OnDestroy {
   pageData: Page | undefined;
   subs: Subscription[] = [];
+  loadingPageData = new LoadingHandler();
 
   constructor(private pageSvc: PageService, private router: Router) {}
 
@@ -24,11 +26,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   checkIfUserHasPage() {
+    this.loadingPageData.start();
     this.subs.push(
       this.pageSvc.checkIfUserHasPage().subscribe((hasPage) => {
         if (hasPage) {
           this.getPageData();
         } else {
+          this.loadingPageData.stop();
           this.router.navigate(['/profile/create']);
         }
       })
@@ -36,9 +40,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   getPageData() {
+    this.loadingPageData.start();
     this.subs.push(
       this.pageSvc.getPageDataByUserId().subscribe((data) => {
         this.pageData = data;
+        this.loadingPageData.stop();
       })
     );
   }
