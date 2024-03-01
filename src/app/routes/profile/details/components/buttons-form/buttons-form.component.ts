@@ -3,11 +3,9 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { buttons } from 'src/app/shared/constants/buttons';
@@ -17,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { Button } from 'src/app/shared/models/button.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditButtonDialogComponent } from '../edit-button-dialog/edit-button-dialog.component';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 
 @Component({
   selector: 'app-buttons-form',
@@ -27,6 +26,7 @@ import { EditButtonDialogComponent } from '../edit-button-dialog/edit-button-dia
 export class ButtonsFormComponent implements OnInit, OnDestroy {
   @Input() pageData: Page | undefined;
   @Output() buttonMutationEvent = new EventEmitter();
+  loadingButtonMutation = new LoadingHandler();
 
   buttonsData = buttons;
   subs: Subscription[] = [];
@@ -52,19 +52,28 @@ export class ButtonsFormComponent implements OnInit, OnDestroy {
   }
 
   saveButtons() {
+    this.loadingButtonMutation.start();
     this.subs.push(
       this.buttonSvc
         .saveButtonsToPage(
           this.pageData?.uri!,
           this.buttonsForm.value.buttons as Button[]
         )
-        .subscribe(() => {
-          this.buttonsForm.reset({
-            buttons: [],
-          });
-          const buttonsFormArray = this.buttonsForm.get('buttons') as FormArray;
-          buttonsFormArray.clear();
-          this.buttonMutationEvent.emit();
+        .subscribe({
+          next: () => {
+            this.buttonsForm.reset({
+              buttons: [],
+            });
+            const buttonsFormArray = this.buttonsForm.get(
+              'buttons'
+            ) as FormArray;
+            buttonsFormArray.clear();
+            this.loadingButtonMutation.stop();
+            this.buttonMutationEvent.emit();
+          },
+          error: () => {
+            this.loadingButtonMutation.stop();
+          },
         })
     );
   }

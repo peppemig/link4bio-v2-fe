@@ -1,3 +1,7 @@
+<ngx-loading
+  [show]="(loadingDetailsMutation.isLoading$ | async)!"
+  [config]="{ fullScreenBackdrop: true }"
+></ngx-loading>
 <div class="user-details-form">
   <div class="user-details-form__layout">
     <div class="link-button">

@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authSvc: AuthService, private router: Router) {}
-
+  loadingRegister = new LoadingHandler();
   registerForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
@@ -36,24 +36,37 @@ export class RegisterComponent implements OnInit {
     }
   );
 
+  constructor(private authSvc: AuthService, private router: Router) {}
+
   ngOnInit(): void {}
 
   register(): void {
     if (this.registerForm.invalid) return;
+    this.loadingRegister.start();
     const { name, surname, email, password } = this.registerForm.value;
     this.authSvc
       .registerWithEmailPassword(email!, password!, name!, surname!)
-      .then(() => this.router.navigate(['/profile/details']));
-  }
-
-  registerWithGoogle(): void {
-    this.authSvc
-      .signInWithGoogle()
       .then(() => {
+        this.loadingRegister.stop();
         this.router.navigate(['/profile/details']);
       })
       .catch(() => {
-        console.log('ERRORE REGISTER CON GOOGLE');
+        this.loadingRegister.stop();
+        console.error('Register error, try again');
+      });
+  }
+
+  registerWithGoogle(): void {
+    this.loadingRegister.start();
+    this.authSvc
+      .signInWithGoogle()
+      .then(() => {
+        this.loadingRegister.stop();
+        this.router.navigate(['/profile/details']);
+      })
+      .catch(() => {
+        this.loadingRegister.stop();
+        console.log('Google register error, try again');
       });
   }
 

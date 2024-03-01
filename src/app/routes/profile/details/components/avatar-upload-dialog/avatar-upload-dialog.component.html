@@ -13,15 +13,31 @@
     (change)="onSelectedFileChange($event)"
   />
   <div class="buttons-container">
-    <button mat-stroked-button mat-dialog-close>Annulla</button>
     <button
-      [disabled]="!avatarImage"
+      [disabled]="loadingAvatarMutation.isLoading$ | async"
+      mat-stroked-button
+      mat-dialog-close
+    >
+      Annulla
+    </button>
+    <button
+      [disabled]="!avatarImage || (loadingAvatarMutation.isLoading$ | async)"
       mat-flat-button
       color="primary"
       type="submit"
       (click)="uploadAvatar()"
     >
       Carica
+      <ng-icon
+        [ngClass]="{ spin: (loadingAvatarMutation.isLoading$ | async) }"
+        [name]="
+          (loadingAvatarMutation.isLoading$ | async)
+            ? 'cssSpinner'
+            : 'ionCloudUpload'
+        "
+        size="20"
+        style="display: flex; justify-content: center; align-items: center"
+      ></ng-icon>
     </button>
   </div>
 </form>

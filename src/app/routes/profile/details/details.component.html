@@ -1,12 +1,17 @@
 <div class="page-container details-screen">
-  <p *ngIf="loadingPageData.isLoading$ | async; else loaded">Loading...</p>
+  <app-details-skeleton
+    *ngIf="loadingPageData.isLoading$ | async; else loaded"
+  ></app-details-skeleton>
   <!-- DETAILS FORM -->
   <ng-template #loaded>
     <app-user-details-form
       [pageData]="pageData"
       (detailsMutationEvent)="getPageData()"
     ></app-user-details-form>
-    <app-theme-form></app-theme-form>
+    <app-theme-form
+      [pageData]="pageData"
+      (themeMutationEvent)="getPageData()"
+    ></app-theme-form>
     <app-buttons-form
       [pageData]="pageData"
       (buttonMutationEvent)="getPageData()"

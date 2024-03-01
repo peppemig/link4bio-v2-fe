@@ -1,5 +1,9 @@
+<ngx-loading
+  [show]="(loadingButtonMutation.isLoading$ | async)!"
+  [config]="{ fullScreenBackdrop: true }"
+></ngx-loading>
 <div class="buttons-form">
-  <h2>Bottoni</h2>
+  <h2>Social</h2>
   <ng-container
     *ngIf="pageData && (pageData?.buttons)!.length > 0; else noButtons"
   >

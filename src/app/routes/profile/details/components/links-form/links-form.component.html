@@ -1,3 +1,7 @@
+<ngx-loading
+  [show]="(loadingLinkMutation.isLoading$ | async)!"
+  [config]="{ fullScreenBackdrop: true }"
+></ngx-loading>
 <div class="links-form">
   <h2>Links</h2>
   <div *ngIf="pageData && pageData.links.length > 0; else noLinks">

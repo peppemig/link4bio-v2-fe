@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -19,15 +20,17 @@ import { Page } from 'src/app/shared/models/page.model';
 import { AvatarUploadDialogComponent } from '../avatar-upload-dialog/avatar-upload-dialog.component';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Subscription } from 'rxjs';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 
 @Component({
   selector: 'app-user-details-form',
   templateUrl: './user-details-form.component.html',
   styleUrls: ['./user-details-form.component.scss'],
 })
-export class UserDetailsFormComponent implements OnInit, OnChanges {
+export class UserDetailsFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() pageData: Page | undefined;
   @Output() detailsMutationEvent = new EventEmitter();
+  loadingDetailsMutation = new LoadingHandler();
 
   subs: Subscription[] = [];
 
@@ -53,8 +56,13 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subs.forEach((s) => s.unsubscribe());
+  }
+
   editUserInfos() {
     if (this.userInfosForm.invalid) return;
+    this.loadingDetailsMutation.start();
     const { displayName, bio, location } = this.userInfosForm.value;
     this.subs.push(
       this.userSvc
@@ -63,8 +71,14 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
           bio: bio!,
           location: location!,
         })
-        .subscribe(() => {
-          this.detailsMutationEvent.emit();
+        .subscribe({
+          next: () => {
+            this.loadingDetailsMutation.stop();
+            this.detailsMutationEvent.emit();
+          },
+          error: () => {
+            this.loadingDetailsMutation.stop();
+          },
         })
     );
   }

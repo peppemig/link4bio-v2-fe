@@ -1,8 +1,13 @@
-<form
-  [formGroup]="buttonForm"
-  (ngSubmit)="editButton()"
-  style="display: flex; flex-direction: column; gap: 20px; width: 400px"
->
+<div class="close-container">
+  <button
+    [disabled]="loadingMutation.isLoading$ | async"
+    mat-dialog-close
+    mat-icon-button
+  >
+    <ng-icon name="ionClose" size="30"></ng-icon>
+  </button>
+</div>
+<form [formGroup]="buttonForm" (ngSubmit)="editButton()">
   <div class="l4b-input">
     <label [htmlFor]="button.id.toString()" class="flex-label">
       <ng-icon [name]="button | getButtonIcon" size="20"></ng-icon>
@@ -17,10 +22,14 @@
       />
     </mat-form-field>
   </div>
-  <div
-    style="display: flex; align-items: center; justify-content: space-between"
-  >
-    <button type="button" mat-flat-button color="warn" (click)="deleteButton()">
+  <div class="buttons-container">
+    <button
+      [disabled]="loadingMutation.isLoading$ | async"
+      type="button"
+      mat-flat-button
+      color="warn"
+      (click)="deleteButton()"
+    >
       Elimina
     </button>
     <button
@@ -30,10 +39,17 @@
       [disabled]="
         buttonForm.pristine ||
         buttonForm.invalid ||
-        buttonForm.value === button.url
+        buttonForm.value === button.url ||
+        (loadingMutation.isLoading$ | async)
       "
     >
       Salva
+      <ng-icon
+        [ngClass]="{ spin: (loadingMutation.isLoading$ | async) }"
+        [name]="(loadingMutation.isLoading$ | async) ? 'cssSpinner' : 'ionSave'"
+        size="20"
+        style="display: flex; justify-content: center; align-items: center"
+      ></ng-icon>
     </button>
   </div>
 </form>

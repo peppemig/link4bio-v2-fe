@@ -14,6 +14,7 @@ import { LinksFormComponent } from './details/components/links-form/links-form.c
 import { AvatarUploadDialogComponent } from './details/components/avatar-upload-dialog/avatar-upload-dialog.component';
 import { EditButtonDialogComponent } from './details/components/edit-button-dialog/edit-button-dialog.component';
 import { EditLinkDialogComponent } from './details/components/edit-link-dialog/edit-link-dialog.component';
+import { DetailsSkeletonComponent } from './details/components/details-skeleton/details-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EditLinkDialogComponent } from './details/components/edit-link-dialog/e
     AvatarUploadDialogComponent,
     EditButtonDialogComponent,
     EditLinkDialogComponent,
+    DetailsSkeletonComponent,
   ],
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
 })

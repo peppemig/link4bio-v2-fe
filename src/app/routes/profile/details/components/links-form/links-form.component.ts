@@ -14,6 +14,7 @@ import { LinkService } from './services/link.service';
 import { Link } from 'src/app/shared/models/link.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditLinkDialogComponent } from '../edit-link-dialog/edit-link-dialog.component';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 
 @Component({
   selector: 'app-links-form',
@@ -24,6 +25,7 @@ import { EditLinkDialogComponent } from '../edit-link-dialog/edit-link-dialog.co
 export class LinksFormComponent implements OnInit, OnDestroy {
   @Input() pageData: Page | undefined;
   @Output() linkMutationEvent = new EventEmitter();
+  loadingLinkMutation = new LoadingHandler();
 
   subs: Subscription[] = [];
 
@@ -48,19 +50,26 @@ export class LinksFormComponent implements OnInit, OnDestroy {
   }
 
   saveLinks() {
+    this.loadingLinkMutation.start();
     this.subs.push(
       this.linkSvc
         .saveLinksToPage(
           this.pageData?.uri!,
           this.linksForm.value.links as Link[]
         )
-        .subscribe(() => {
-          this.linksForm.reset({
-            links: [],
-          });
-          const linksFormArray = this.linksForm.get('links') as FormArray;
-          linksFormArray.clear();
-          this.linkMutationEvent.emit();
+        .subscribe({
+          next: () => {
+            this.linksForm.reset({
+              links: [],
+            });
+            const linksFormArray = this.linksForm.get('links') as FormArray;
+            linksFormArray.clear();
+            this.loadingLinkMutation.stop();
+            this.linkMutationEvent.emit();
+          },
+          error: () => {
+            this.loadingLinkMutation.stop();
+          },
         })
     );
   }

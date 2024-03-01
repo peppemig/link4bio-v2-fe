@@ -22,9 +22,12 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@ng-icons/core": "^22.4.0",
+    "@ng-icons/css.gg": "^27.1.0",
     "@ng-icons/ionicons": "^27.1.0",
     "@ng-icons/remixicon": "^27.1.0",
     "ngx-colors": "^3.1.4",
+    "ngx-loading": "^14.0.0",
+    "ngx-skeleton": "^14.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

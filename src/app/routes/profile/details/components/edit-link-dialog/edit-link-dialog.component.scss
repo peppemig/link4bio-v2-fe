@@ -1,0 +1,28 @@
+.close-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 400px;
+  .inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 import { AvatarUploadService } from 'src/app/shared/services/avatar-upload.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { AvatarUploadService } from 'src/app/shared/services/avatar-upload.servi
 })
 export class AvatarUploadDialogComponent implements OnInit {
   @Output() avatarMutationEvent = new EventEmitter();
+  loadingAvatarMutation = new LoadingHandler();
 
   avatarImage: File | null = null;
   avatarImageMin: any = null;
@@ -21,9 +23,18 @@ export class AvatarUploadDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   uploadAvatar() {
-    this.avatarUploadSvc.uploadAvatar(this.avatarImage!).subscribe(() => {
-      this.avatarMutationEvent.emit();
-      this.dialogRef.close();
+    this.dialogRef.disableClose = true;
+    this.loadingAvatarMutation.start();
+    this.avatarUploadSvc.uploadAvatar(this.avatarImage!).subscribe({
+      next: () => {
+        this.avatarMutationEvent.emit();
+        this.dialogRef.close();
+        this.loadingAvatarMutation.stop();
+      },
+      error: () => {
+        this.dialogRef.disableClose = false;
+        this.loadingAvatarMutation.stop();
+      },
     });
   }
 

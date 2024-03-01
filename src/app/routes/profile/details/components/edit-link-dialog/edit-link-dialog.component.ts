@@ -17,6 +17,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Link } from 'src/app/shared/models/link.model';
 import { LinkService } from '../links-form/services/link.service';
+import { LoadingHandler } from 'src/app/shared/handlers/loading-handler';
 
 @Component({
   selector: 'app-edit-link-dialog',
@@ -25,6 +26,7 @@ import { LinkService } from '../links-form/services/link.service';
 })
 export class EditLinkDialogComponent implements OnInit, OnDestroy {
   @Output() dialogMutationEvent = new EventEmitter();
+  loadingMutation = new LoadingHandler();
 
   linkForm = new FormGroup({
     title: new FormControl(this.link.title, [Validators.required]),
@@ -49,6 +51,8 @@ export class EditLinkDialogComponent implements OnInit, OnDestroy {
 
   editLink() {
     if (this.linkForm.invalid) return;
+    this.dialogRef.disableClose = true;
+    this.loadingMutation.start();
     const { title, subtitle, url } = this.linkForm.value;
     this.subs.push(
       this.linkSvc
@@ -57,18 +61,34 @@ export class EditLinkDialogComponent implements OnInit, OnDestroy {
           subtitle: subtitle!,
           url: url!,
         })
-        .subscribe(() => {
-          this.dialogMutationEvent.emit();
-          this.dialogRef.close();
+        .subscribe({
+          next: () => {
+            this.dialogMutationEvent.emit();
+            this.dialogRef.close();
+            this.loadingMutation.stop();
+          },
+          error: () => {
+            this.dialogRef.disableClose = false;
+            this.loadingMutation.stop();
+          },
         })
     );
   }
 
   deleteLink() {
+    this.dialogRef.disableClose = true;
+    this.loadingMutation.start();
     this.subs.push(
-      this.linkSvc.deleteLink(this.link.id).subscribe(() => {
-        this.dialogMutationEvent.emit();
-        this.dialogRef.close();
+      this.linkSvc.deleteLink(this.link.id).subscribe({
+        next: () => {
+          this.dialogMutationEvent.emit();
+          this.dialogRef.close();
+          this.loadingMutation.stop();
+        },
+        error: () => {
+          this.dialogRef.disableClose = false;
+          this.loadingMutation.stop();
+        },
       })
     );
   }

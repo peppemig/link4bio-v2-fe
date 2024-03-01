@@ -1,0 +1,31 @@
+@import "/src/assets/scss/colors";
+
+.details-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .box {
+    border: 2px solid $grey-light;
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .user-details-skl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-form-skl {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    height: 300px;
+  }
+  .generic-skl {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
