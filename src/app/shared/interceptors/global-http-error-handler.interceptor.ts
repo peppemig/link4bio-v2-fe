@@ -25,7 +25,6 @@ export class GlobalHttpErrorHandler implements HttpInterceptor {
     }
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        // TODO: ADD SNACKBAR
         this.snackBar.open('Ops! Qualcosa è andato storto', 'Chiudi');
         return throwError(() => err);
       })

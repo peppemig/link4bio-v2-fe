@@ -1,37 +1,94 @@
-<div class="link-container">
-  <div class="link-container__layout">
-    <!-- AVATAR -->
-    <div class="avatar">
-      <span>G</span>
-    </div>
+<app-link-skeleton
+  *ngIf="loadingPage.isLoading$ | async; else pageLoaded"
+></app-link-skeleton>
+<ng-template #pageLoaded>
+  <div
+    *ngIf="pageData && !pageDoesNotExist; else pageNotFound"
+    class="link-container"
+  >
+    <div class="link-container__layout">
+      <!-- AVATAR -->
+      <div class="avatar">
+        <img
+          alt="Avatar"
+          *ngIf="pageData.user.avatarUrl; else noAvatar"
+          [src]="pageData.user.avatarUrl"
+          style="height: 96px; width: 96px; border-radius: 9999px"
+        />
+        <ng-template #noAvatar>
+          <span>{{ pageData.user.displayName.charAt(0) }}</span>
+        </ng-template>
+      </div>
 
-    <!-- INFOS -->
-    <div class="infos">
-      <h1>@mariorossi</h1>
-      <h2>Mario Rossi</h2>
-      <h3>Roma, Italia</h3>
-    </div>
+      <!-- INFOS -->
+      <div
+        class="infos"
+        [style.color]="
+          pageData.theme.textColor ? pageData.theme.textColor : '#000'
+        "
+      >
+        <h1>@{{ pageData.uri }}</h1>
+        <h2>{{ pageData.user.displayName }}</h2>
+        <div style="display: flex; align-items: center; gap: 5px">
+          <ng-icon name="ionLocation" size="20"></ng-icon>
+          <h3>{{ pageData.user.location }}</h3>
+        </div>
+        <p style="padding-top: 20px !important">{{ pageData.user.bio }}</p>
+      </div>
 
-    <!-- BUTTONS -->
-    <div class="buttons">
-      <button mat-icon-button>
-        <ng-icon name="ionLocation" size="30"></ng-icon>
-      </button>
-      <button mat-icon-button>
-        <ng-icon name="ionLocation" size="30"></ng-icon>
-      </button>
-    </div>
+      <!-- BUTTONS -->
+      <div
+        class="buttons"
+        *ngIf="pageData.buttons && pageData.buttons.length > 0"
+      >
+        <a
+          target="_blank"
+          style="display: flex; align-items: center; justify-content: center"
+          *ngFor="let button of pageData.buttons"
+          mat-icon-button
+          [href]="button.url"
+        >
+          <ng-icon
+            [name]="button | getButtonIcon"
+            size="30"
+            [color]="
+              pageData.theme.buttonColor ? pageData.theme.buttonColor : '#000'
+            "
+          ></ng-icon>
+        </a>
+      </div>
 
-    <!-- LINKS -->
-    <div class="links">
-      <a class="link">
-        <h2>Titolo</h2>
-        <p>Sottotitolo</p>
-      </a>
-      <a class="link">
-        <h2>Titolo</h2>
-        <p>Sottotitolo</p>
-      </a>
+      <!-- LINKS -->
+      <div *ngIf="pageData.links && pageData.links.length > 0" class="links">
+        <a
+          *ngFor="let link of pageData.links"
+          target="_blank"
+          [href]="link.url"
+          class="link"
+          [style.background]="
+            pageData.theme.buttonColor ? pageData.theme.buttonColor : '#f9fafb'
+          "
+          [style.color]="
+            pageData.theme.buttonTextColor
+              ? pageData.theme.buttonTextColor
+              : '#000'
+          "
+          [style.border-color]="
+            pageData.theme.buttonColor ? pageData.theme.buttonColor : '#e5e5e5'
+          "
+        >
+          <h2>{{ link.title }}</h2>
+          <p>{{ link.subtitle }}</p>
+        </a>
+      </div>
     </div>
   </div>
-</div>
+  <ng-template #pageNotFound>
+    <div class="link-container">
+      <div class="link-container__layout">
+        <div class="avatar">:(</div>
+        <div class="infos"><h1>Questo utente non esiste</h1></div>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>

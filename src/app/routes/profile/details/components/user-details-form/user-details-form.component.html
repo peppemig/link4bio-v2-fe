@@ -5,7 +5,10 @@
 <div class="user-details-form">
   <div class="user-details-form__layout">
     <div class="link-button">
-      <a mat-stroked-button [routerLink]="['/link/asd']" target="_blank"
+      <a
+        mat-stroked-button
+        routerLink="/link/{{ pageData?.uri }}"
+        target="_blank"
         >Vai al link<ng-icon
           name="ionLink"
           size="20"

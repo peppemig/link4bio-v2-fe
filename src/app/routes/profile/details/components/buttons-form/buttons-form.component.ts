@@ -81,6 +81,7 @@ export class ButtonsFormComponent implements OnInit, OnDestroy {
   openEditButtonDialog(button: Button) {
     let dialogRef = this.dialog.open(EditButtonDialogComponent, {
       data: button,
+      panelClass: 'dialog-responsive',
     });
     const sub = dialogRef.componentInstance.dialogMutationEvent.subscribe(
       () => {

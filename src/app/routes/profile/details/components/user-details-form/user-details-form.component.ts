@@ -86,6 +86,7 @@ export class UserDetailsFormComponent implements OnInit, OnChanges, OnDestroy {
   openAvatarUploadDialog() {
     let dialogRef = this.dialog.open(AvatarUploadDialogComponent, {
       autoFocus: false,
+      panelClass: 'dialog-responsive',
     });
     const sub = dialogRef.componentInstance.avatarMutationEvent.subscribe(
       () => {

@@ -33,6 +33,8 @@ export class PageService {
       'URI',
       uri
     );
-    return this.http.get<Page>(endpoint, { headers: { skipAuth: 'true' } });
+    return this.http.get<Page>(endpoint, {
+      headers: { skipAuth: 'true', skipError: 'true' },
+    });
   }
 }

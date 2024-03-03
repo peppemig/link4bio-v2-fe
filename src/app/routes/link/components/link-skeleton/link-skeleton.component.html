@@ -1,0 +1,29 @@
+<div class="link-container">
+  <div class="link-container__layout">
+    <ngx-skeleton
+      borderRadius="9999px"
+      style="height: 96px; width: 96px"
+    ></ngx-skeleton>
+    <div class="infos" style="gap: 5px">
+      <ngx-skeleton
+        *ngFor="let item of [].constructor(3); let i = index"
+        style="height: 30px; width: 200px"
+        borderRadius="4px"
+      ></ngx-skeleton>
+    </div>
+    <div class="buttons">
+      <ngx-skeleton
+        *ngFor="let item of [].constructor(3); let i = index"
+        style="height: 40px; width: 40px"
+        borderRadius="9999px"
+      ></ngx-skeleton>
+    </div>
+    <div class="links">
+      <ngx-skeleton
+        *ngFor="let item of [].constructor(3); let i = index"
+        height="60px"
+        borderRadius="4px"
+      ></ngx-skeleton>
+    </div>
+  </div>
+</div>

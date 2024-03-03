@@ -6,11 +6,7 @@
   <div class="grid-container">
     <!--LINK PREVIEW-->
     <div
-      [style.background]="
-        pageData?.theme?.backgroundColor
-          ? pageData?.theme?.backgroundColor
-          : '#fff'
-      "
+      [style.background]="themeForm.value.backgroundColor"
       class="link-preview__container"
     >
       <!--AVATAR-->
@@ -26,15 +22,13 @@
         </ng-template>
       </div>
       <!--INFOS-->
-      <div
-        [style.color]="
-          pageData?.theme?.textColor ? pageData?.theme?.textColor : '#000'
-        "
-        class="infos"
-      >
+      <div [style.color]="themeForm.value.textColor" class="infos">
         <h1>@{{ pageData?.uri }}</h1>
         <h2>{{ pageData?.user?.displayName }}</h2>
-        <h3>{{ pageData?.user?.location }}</h3>
+        <div style="display: flex; align-items: center; gap: 5px">
+          <ng-icon name="ionLocation" size="20"></ng-icon>
+          <h3>{{ pageData?.user?.location }}</h3>
+        </div>
         <p style="padding-top: 20px !important">{{ pageData?.user?.bio }}</p>
       </div>
       <!--BUTTONS-->
@@ -52,11 +46,7 @@
           <ng-icon
             [name]="button | getButtonIcon"
             size="30"
-            [color]="
-              pageData?.theme?.buttonColor
-                ? pageData?.theme?.buttonColor
-                : '#000'
-            "
+            [color]="themeForm.value.buttonColor!"
           ></ng-icon>
         </a>
       </div>
@@ -68,21 +58,9 @@
         <a
           target="_blank"
           [href]="pageData?.links?.at(0)?.url"
-          [style.background]="
-            pageData?.theme?.buttonColor
-              ? pageData?.theme?.buttonColor
-              : '#f9fafb'
-          "
-          [style.color]="
-            pageData?.theme?.buttonTextColor
-              ? pageData?.theme?.buttonTextColor
-              : '#000'
-          "
-          [style.border-color]="
-            pageData?.theme?.buttonColor
-              ? pageData?.theme?.buttonColor
-              : '#e5e5e5'
-          "
+          [style.background]="themeForm.value.buttonColor"
+          [style.color]="themeForm.value.buttonTextColor"
+          [style.border-color]="themeForm.value.buttonColor"
           class="link"
         >
           <h2>{{ pageData?.links?.at(0)?.title }}</h2>
@@ -102,7 +80,7 @@
           id="backgroundColor"
           class="picker-btn"
           formControlName="backgroundColor"
-          [style.background]="themeForm.get('backgroundColor')?.value"
+          [style.background]="themeForm.value.backgroundColor"
           ngx-colors-trigger
         ></div>
       </div>
@@ -112,7 +90,7 @@
           id="textColor"
           class="picker-btn"
           formControlName="textColor"
-          [style.background]="themeForm.get('textColor')?.value"
+          [style.background]="themeForm.value.textColor"
           ngx-colors-trigger
         ></div>
       </div>
@@ -122,7 +100,7 @@
           id="buttonColor"
           class="picker-btn"
           formControlName="buttonColor"
-          [style.background]="themeForm.get('buttonColor')?.value"
+          [style.background]="themeForm.value.buttonColor"
           ngx-colors-trigger
         ></div>
       </div>
@@ -132,7 +110,7 @@
           id="buttonTextColor"
           class="picker-btn"
           formControlName="buttonTextColor"
-          [style.background]="themeForm.get('buttonTextColor')?.value"
+          [style.background]="themeForm.value.buttonTextColor"
           ngx-colors-trigger
         ></div>
       </div>

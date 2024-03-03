@@ -77,6 +77,7 @@ export class LinksFormComponent implements OnInit, OnDestroy {
   openEditLinkDialog(link: Link) {
     let dialogRef = this.dialog.open(EditLinkDialogComponent, {
       data: link,
+      panelClass: 'dialog-responsive',
     });
     const sub = dialogRef.componentInstance.dialogMutationEvent.subscribe(
       () => {

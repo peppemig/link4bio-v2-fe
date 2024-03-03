@@ -86,3 +86,13 @@
     justify-content: flex-end;
   }
 }
+
+@media only screen and (max-width: 760px) {
+  .theme-form {
+    .grid-container {
+      grid-template-rows: 2fr;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+}
